@@ -14,7 +14,6 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-print(BASE_DIR)
 
 
 # Quick-start development settings - unsuitable for production
@@ -53,9 +52,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "cfehome.urls"
 
-# REACT_INDEX_DIR =  BASE_DIR / "staticfiles/frontend/prod"
-# if DEBUG:
-#     REACT_INDEX_DIR =  BASE_DIR / "staticfiles/frontend/dev"
+REACT_INDEX_DIR =  BASE_DIR / "staticfiles/frontend/prod"
+if DEBUG:
+    REACT_INDEX_DIR =  BASE_DIR / "staticfiles/frontend/dev"
 
 TEMPLATES = [
     {
@@ -68,6 +67,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "cfehome.context_processors.reactjs_assets_paths"
             ],
         },
     },

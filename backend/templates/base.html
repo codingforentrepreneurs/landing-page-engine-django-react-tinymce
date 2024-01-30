@@ -7,8 +7,12 @@
     <link rel="icon" type="image/svg+xml" href="/static/frontend/dev/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
-    <script type="module" crossorigin src="{% static 'frontend/dev/assets/index-zVw4wXmj.js' %}"></script>
-    <link rel="stylesheet" crossorigin href="/static/frontend/dev/assets/index-4sK4E3Wk.css">
+    {% for path in reactjs_assets_js_paths %}
+    <script type="module" crossorigin src="{% static path %}"></script>
+    {% endfor %}
+    {% for path in reactjs_assets_css_paths %}
+    <link rel="stylesheet" crossorigin href="{% static path %}">
+    {% endfor %}
   </head>
   <body>
     <div id="root"></div>
