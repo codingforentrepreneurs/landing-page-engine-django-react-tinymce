@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "vite build --watch --emptyOutDir --base /static/frontend/dev --outDir backend/staticfiles/frontend/dev",
+    "build": "vite build --base /static/frontend/prod --outDir backend/staticfiles/frontend/prod",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
