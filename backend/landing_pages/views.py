@@ -1,4 +1,5 @@
 import json
+from django.shortcuts import render
 from django.http import JsonResponse
 
 from .models import LandingPage
@@ -14,7 +15,7 @@ def landing_page_create_view(request):
     form = LandingPageForm(data)
     if form.is_valid():
         obj = form.save() #obj= LandingPage instance
-        return JsonResponse({'id': obj.id})
+        return JsonResponse({'id': obj.id}, status=201)
     if form.has_error:
         print(form.errors)
         # content = data.get('content')
@@ -22,4 +23,17 @@ def landing_page_create_view(request):
         #     LandingPage.objects.create(
         #         content=content
         #     )
-        return JsonResponse({'data': 'done'})
+        return JsonResponse({'data': 'done'}, status=400)
+    
+def landing_page_detail_view(request, id=None):
+    is_json = request.headers.get('content-type') == 'application/json'
+    if is_json:
+        try:
+            instance = LandingPage.objects.get(id=id)
+        except:
+            instance = None
+        if instance is None:
+             return JsonResponse({}, status=404)
+        return JsonResponse({'content': instance.content}, status=200)
+
+    return render(request, 'landing_pages/detail.html', {"object_id": id})

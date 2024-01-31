@@ -15,6 +15,7 @@
     {% endfor %}
   </head>
   <body>
-    <div id="tiny" data-api-key="{{ tiny_api_key }}" data-csrf-token="{{ csrf_token }}"></div>
+    {% block content %}
+    {% endblock content %}
   </body>
 </html>

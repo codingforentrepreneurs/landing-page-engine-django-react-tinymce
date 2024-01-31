@@ -1,12 +1,38 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import './tiny.css'
 
 export default function TinyMCE(props) {
   const [content, setContent] = useState('')
+  const [initContent, setInitContent] = useState('')
   const editorRef = useRef(null);
-  const {apiKey, csrfToken} = props // Tiny.cloud dashboard
+  const {apiKey, csrfToken, objectId} = props // Tiny.cloud dashboard
   console.log('csrfToken', csrfToken)
+  const performLookup = useCallback(async (objectId) => {
+      const getOptions = {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+      const response = await fetch(`/landing-pages/${objectId}/`, getOptions)
+      if (response.ok) {
+        const newData = await response.json()
+        const {content} = newData
+        if (content) {
+          setInitContent(content)
+        }
+      }
+      
+    
+  }, [])
+
+  useEffect(()=>{
+    if (objectId){
+      performLookup(objectId)
+    }
+  }, [objectId])
+
   const handleChange = useCallback(() => {
     if (editorRef.current) {
       setContent(editorRef.current.getContent())
@@ -49,7 +75,7 @@ export default function TinyMCE(props) {
           apiKey={apiKey}
           onEditorChange={handleChange}
           onInit={handleOnInit}
-          initialValue="<p>This is the initial content of the editor.</p>"
+          initialValue={initContent}
           init={{
             height: 500,
             menubar: false,
