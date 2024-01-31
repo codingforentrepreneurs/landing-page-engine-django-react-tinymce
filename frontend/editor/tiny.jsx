@@ -26,7 +26,14 @@ export default function TinyMCE(props) {
         body: jsonData
       }
       const response = await fetch('/landing-pages/create/', postOptions)
-      console.log(await response.text())
+      if (response.ok) {
+        const newData = await response.json()
+        const {id} = newData
+        if (id) {
+          window.location.href = `/landing-pages/${id}/`
+        }
+      }
+      
     }
   }, [editorRef, csrfToken])
 
