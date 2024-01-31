@@ -22,6 +22,7 @@ from landing_pages import views
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name='home.html')),
+    path("live/<int:id>/", views.landing_page_live_view),
     path("landing-pages/<int:id>/", views.landing_page_detail_view),
     path("landing-pages/create/", views.landing_page_create_view),
     path("admin/", admin.site.urls),
