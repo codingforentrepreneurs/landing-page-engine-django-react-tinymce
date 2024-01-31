@@ -18,7 +18,10 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
 
+from . import views
+
 urlpatterns = [
     path("", TemplateView.as_view(template_name='home.html')),
+    path("landing-pages/create/", views.landing_page_create_view),
     path("admin/", admin.site.urls),
 ]

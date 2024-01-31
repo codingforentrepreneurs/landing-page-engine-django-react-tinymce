@@ -13,6 +13,23 @@ export default function TinyMCE(props) {
     }
   }, [editorRef])
 
+  const handleSubmit = useCallback(async () => {
+    if (editorRef.current) {
+      const data = {content: editorRef.current.getContent()}
+      const jsonData = JSON.stringify(data)
+      const postOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken
+        },
+        body: jsonData
+      }
+      const response = await fetch('/landing-pages/create/', postOptions)
+      console.log(await response.text())
+    }
+  }, [editorRef, csrfToken])
+
   const handleOnInit = (evt, editor) => {
     editorRef.current = editor
     handleChange()
@@ -41,7 +58,7 @@ export default function TinyMCE(props) {
             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
           }}
         />
-        <button onClick={handleChange}>Save</button>
+        <button onClick={handleSubmit}>Save</button>
     </div>
     <div>{content ? <div dangerouslySetInnerHTML={{__html:content}}></div> : null}</div>
   </div>
