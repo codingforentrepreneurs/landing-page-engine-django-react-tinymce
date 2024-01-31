@@ -1,10 +1,12 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
+import './tiny.css'
 
-export default function TinyMCE() {
+export default function TinyMCE(props) {
   const [content, setContent] = useState('')
   const editorRef = useRef(null);
-  const apiKey = 'd7dk00vzzntbn3ltvykf7jd9j0017pxs3u3lu1tkiwmlyzec' // Tiny.cloud dashboard
+  const {apiKey, csrfToken} = props // Tiny.cloud dashboard
+  console.log('csrfToken', csrfToken)
   const handleChange = useCallback(() => {
     if (editorRef.current) {
       setContent(editorRef.current.getContent())

@@ -1,10 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import TinyMCE from './editor/tiny'
 import './index.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+
+const tinyEl = document.getElementById('tiny')
+
+if (tinyEl) {
+  ReactDOM.createRoot(tinyEl).render(
+    <React.StrictMode>
+      <TinyMCE {...tinyEl.dataset} />
+    </React.StrictMode>,
+  )
+}
