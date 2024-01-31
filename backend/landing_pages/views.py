@@ -12,7 +12,12 @@ def landing_page_create_view(request):
     # print(request.headers.get('content-type') == 'application/json')
     # print(request.body)
     data = json.loads(request.body)
-    form = LandingPageForm(data)
+    object_id = data.get('object_id') or None
+    try:
+        instance = LandingPage.objects.get(id=object_id)
+    except:
+        instance = None
+    form = LandingPageForm(data, instance=instance)
     if form.is_valid():
         obj = form.save() #obj= LandingPage instance
         return JsonResponse({'id': obj.id}, status=201)

@@ -7,7 +7,6 @@ export default function TinyMCE(props) {
   const [initContent, setInitContent] = useState('')
   const editorRef = useRef(null);
   const {apiKey, csrfToken, objectId} = props // Tiny.cloud dashboard
-  console.log('csrfToken', csrfToken)
   const performLookup = useCallback(async (objectId) => {
       const getOptions = {
         method: "get",
@@ -42,6 +41,9 @@ export default function TinyMCE(props) {
   const handleSubmit = useCallback(async () => {
     if (editorRef.current) {
       const data = {content: editorRef.current.getContent()}
+      if (objectId) {
+        data['object_id'] = objectId
+      }
       const jsonData = JSON.stringify(data)
       const postOptions = {
         method: "POST",
@@ -55,13 +57,13 @@ export default function TinyMCE(props) {
       if (response.ok) {
         const newData = await response.json()
         const {id} = newData
-        if (id) {
+        if (id && !objectId) {
           window.location.href = `/landing-pages/${id}/`
         }
       }
       
     }
-  }, [editorRef, csrfToken])
+  }, [editorRef, csrfToken, objectId])
 
   const handleOnInit = (evt, editor) => {
     editorRef.current = editor
