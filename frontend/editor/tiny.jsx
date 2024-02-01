@@ -83,14 +83,35 @@ export default function TinyMCE(props) {
             height: "80vh",
             menubar: false,
             browser_spellcheck: true,
+            mergetags_list: [
+              {
+                title: 'Django Tags',
+                menu: [
+                  {
+                    value: "username",
+                    label: "Django user"
+                  },
+                  {
+                    value: "request.build_absolute_uri",
+                    label: "URI"
+                  },
+                  {
+                    value: "request.path",
+                    label: "Path"
+                  },
+
+                ]
+              }
+
+            ],
             plugins: [
               'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
               'emoticons',
               'tinymcespellchecker',
               'anchor', 'searchreplace', 'visualblocks', 'codesample', 'code', 'fullscreen',
-              'insertdatetime', 'media', 'pageembed', 'table', 'help', 'wordcount'
+              'insertdatetime', 'media', 'pageembed', 'table', 'help', 'wordcount', 'mergetags'
             ],
-            toolbar: 'codesample | pageembed spellcheckdialog emoticons code wordcount | ' + 
+            toolbar: 'mergetags code |' + 
             'undo redo | blocks | ' +
               'bold italic forecolor | alignleft aligncenter ' +
               'alignright alignjustify | bullist numlist outdent indent | ' +

@@ -1,5 +1,6 @@
 import json
 from django.shortcuts import render, get_object_or_404
+from django.template import Template, Context
 from django.http import JsonResponse
 
 from .models import LandingPage
@@ -45,4 +46,9 @@ def landing_page_detail_view(request, id=None):
 
 def landing_page_live_view(request, id=None):
     instance = get_object_or_404(LandingPage, id=id, active=True)
-    return render(request, 'live/lp.html', {"content": instance.content})
+    inline_template = instance.content
+    t = Template(inline_template)
+    # request.user.username
+    c = Context({"username": "AABVC".title(), "request": request})
+    content = t.render(c)
+    return render(request, 'live/lp.html', {"content": content})
