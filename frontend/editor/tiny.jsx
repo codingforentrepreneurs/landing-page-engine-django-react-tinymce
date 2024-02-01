@@ -1,6 +1,7 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import './tiny.css'
+import './prism.css'
 
 export default function TinyMCE(props) {
   const [content, setContent] = useState('')
@@ -86,10 +87,10 @@ export default function TinyMCE(props) {
               'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
               'emoticons',
               'tinymcespellchecker',
-              'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-              'insertdatetime', 'media', 'pageembed', 'table', 'code', 'help', 'wordcount'
+              'anchor', 'searchreplace', 'visualblocks', 'codesample', 'code', 'fullscreen',
+              'insertdatetime', 'media', 'pageembed', 'table', 'help', 'wordcount'
             ],
-            toolbar: 'pageembed spellcheckdialog emoticons code wordcount | ' + 
+            toolbar: 'codesample | pageembed spellcheckdialog emoticons code wordcount | ' + 
             'undo redo | blocks | ' +
               'bold italic forecolor | alignleft aligncenter ' +
               'alignright alignjustify | bullist numlist outdent indent | ' +
