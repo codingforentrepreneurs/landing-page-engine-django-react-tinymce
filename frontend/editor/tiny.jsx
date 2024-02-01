@@ -117,6 +117,35 @@ export default function TinyMCE(props) {
             height: "80vh",
             menubar: false,
             browser_spellcheck: true,
+            ai_request: (request, respondWith) => {
+              const openAiOptions = {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'X-CSRFToken': csrfToken,
+                },
+                body: JSON.stringify({
+                  temperature: 0.7,
+                  max_tokens: 800,
+                  messages: [{ role: 'user', content: request.prompt }],
+                })
+              };
+              respondWith.string((signal) => window.fetch('/ai/request/', { signal, ...openAiOptions })
+                .then(async (response) => {
+                  if (response) {
+                    const data = await response.json();
+                    if (data.error) {
+                      throw new Error(`${data.error.type}: ${data.error.message}`);
+                    } else if (response.ok) {
+                      // Extract the response content from the data returned by the API
+                      return data?.content?.trim();
+                    }
+                  } else {
+                    throw new Error('Failed to communicate with the ChatGPT API');
+                  }
+                })
+              );
+            },
             mergetags_list: [
               {
                 title: 'Django Tags',
@@ -141,6 +170,7 @@ export default function TinyMCE(props) {
             advtemplate_list: handleAdvtemplateList,
             advtemplate_get_template: handleGetTemplate,
             plugins: [
+              'ai',
               'advlist', 
               'advtemplate', 
               'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
@@ -149,7 +179,7 @@ export default function TinyMCE(props) {
               'anchor', 'searchreplace', 'visualblocks', 'codesample', 'code', 'fullscreen',
               'insertdatetime', 'media', 'pageembed', 'table', 'help', 'wordcount', 'mergetags'
             ],
-            toolbar: 'inserttemplate mergetags code |' + 
+            toolbar: 'aidialog aishortcuts |'  + 'inserttemplate mergetags code |' + 
             'undo redo | blocks | ' +
               'bold italic forecolor | alignleft aligncenter ' +
               'alignright alignjustify | bullist numlist outdent indent | ' +

@@ -19,9 +19,11 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from landing_pages import views
+from .views import ai_completion_view
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name='home.html')),
+    path("ai/request/", ai_completion_view),
     path("live/<int:id>/", views.landing_page_live_view),
     path("landing-pages/<int:id>/", views.landing_page_detail_view),
     path("landing-pages/create/", views.landing_page_create_view),
