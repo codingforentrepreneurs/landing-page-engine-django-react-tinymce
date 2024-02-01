@@ -87,12 +87,9 @@ export default function TinyMCE(props) {
               'emoticons',
               'tinymcespellchecker',
               'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-              'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+              'insertdatetime', 'media', 'pageembed', 'table', 'code', 'help', 'wordcount'
             ],
-            content_langs: [
-              { title: 'English (US)', code: 'en_US' },
-            ],
-            toolbar: 'spellcheckdialog emoticons code wordcount | ' + 
+            toolbar: 'pageembed spellcheckdialog emoticons code wordcount | ' + 
             'undo redo | blocks | ' +
               'bold italic forecolor | alignleft aligncenter ' +
               'alignright alignjustify | bullist numlist outdent indent | ' +
