@@ -70,6 +70,40 @@ export default function TinyMCE(props) {
     editorRef.current = editor
     handleChange()
   }
+  const defaultTemplate = `<h4 style="text-align: center;">Merge Tags</h4>
+  <h1 style="text-align: center;">Hello {{username}}</h1>
+  <p>&nbsp;</p>
+  <p>{{username}} {{request.build_absolute_uri}} {{request.path}}</p>`
+
+  const templateList = [
+    {
+      id: '1',
+      title: 'My Category',
+      items: [
+        {
+          id: '2',
+          title: "Template to use",
+          content: defaultTemplate
+        }
+      ]
+    }
+  ]
+
+  const handleAdvtemplateList = () => {
+    return new Promise((resolve, reject)=>{resolve(templateList)})
+  }
+
+  const handleGetTemplate = (id) => {
+    const items = templateList[0].items
+    const template = items.filter(id=>id)[0]
+    // fetch
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(template);
+      }, 1000);
+    });
+  }
+
   return (
     <div className="side-by-side">
     
@@ -104,14 +138,18 @@ export default function TinyMCE(props) {
               }
 
             ],
+            advtemplate_list: handleAdvtemplateList,
+            advtemplate_get_template: handleGetTemplate,
             plugins: [
-              'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+              'advlist', 
+              'advtemplate', 
+              'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
               'emoticons',
               'tinymcespellchecker',
               'anchor', 'searchreplace', 'visualblocks', 'codesample', 'code', 'fullscreen',
               'insertdatetime', 'media', 'pageembed', 'table', 'help', 'wordcount', 'mergetags'
             ],
-            toolbar: 'mergetags code |' + 
+            toolbar: 'inserttemplate mergetags code |' + 
             'undo redo | blocks | ' +
               'bold italic forecolor | alignleft aligncenter ' +
               'alignright alignjustify | bullist numlist outdent indent | ' +
