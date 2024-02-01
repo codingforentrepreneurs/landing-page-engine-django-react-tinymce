@@ -79,14 +79,21 @@ export default function TinyMCE(props) {
           onInit={handleOnInit}
           initialValue={initContent}
           init={{
-            height: 500,
+            height: "80vh",
             menubar: false,
+            browser_spellcheck: true,
             plugins: [
               'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+              'emoticons',
+              'tinymcespellchecker',
               'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
               'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
             ],
-            toolbar: 'undo redo | blocks | ' +
+            content_langs: [
+              { title: 'English (US)', code: 'en_US' },
+            ],
+            toolbar: 'spellcheckdialog emoticons code wordcount | ' + 
+            'undo redo | blocks | ' +
               'bold italic forecolor | alignleft aligncenter ' +
               'alignright alignjustify | bullist numlist outdent indent | ' +
               'removeformat | help',
