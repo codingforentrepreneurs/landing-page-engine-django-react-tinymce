@@ -56,6 +56,7 @@ Install requirements.txt
 
 Run Django
 ```
+cd backend
 python manage.py runserver
 ```
 
