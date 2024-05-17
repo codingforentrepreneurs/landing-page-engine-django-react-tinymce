@@ -14,13 +14,20 @@ git clone https://github.com/codingforentrepreneurs/landing-page-engine-django-r
 
 Create an account on:
 
-- https://tiny.cloud
-- https://openai.com
+- [Tiny Cloud](https://kirr.co/xvnpsj)
+- [OpenAI](https://openai.com)
 
 Create API Keys at:
 
-- https://www.tiny.cloud/my-account/dashboard/
-- https://platform.openai.com/api-keys
+- [My Account on Tiny](https://kirr.co/okifco)
+- [OpenAI API Keys](https://platform.openai.com/api-keys)
+
+Create `.env`:
+    
+```bash
+cd ~/dev/landing-page-engine
+echo "" >> .env
+```
 
 Save API Keys to `.env` with:
 
