@@ -1,6 +1,6 @@
 # Landing Page Engine with Django, React.js, and TinyMCE
 
-
+Be sure to grab the student bonus form TinyMCE [https://kirr.co/uhvya9](https://kirr.co/uhvya9).
 
 ## Clone Project
 
