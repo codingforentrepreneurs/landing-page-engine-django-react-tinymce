@@ -1,3 +1,5 @@
+[![Landing Page Engine Course Thumbnail](https://static.codingforentrepreneurs.com/media/courses/reactify-django-landing-page-engine/77f15bd6-9369-4b16-aabb-63049bb92ce1.jpg)](https://www.codingforentrepreneurs.com/courses/reactify-django-landing-page-engine/)
+
 # Landing Page Engine with Django, React.js, and TinyMCE
 
 Be sure to grab the student bonus form TinyMCE [https://kirr.co/uhvya9](https://kirr.co/uhvya9).
